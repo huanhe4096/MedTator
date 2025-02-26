@@ -66,6 +66,99 @@ const toggleMenuSaveAs = (event) => {
 ///////////////////////////////////////////////////////////
 // Set Labels
 ///////////////////////////////////////////////////////////
+const menu_set_labels = ref(null);
+const items_menu_set_labels = ref([
+  {
+    label: 'Label Options',
+    items: [
+      {
+        icon: 'pi pi-bookmark',
+        label: 'Set Green Label',
+        class: 'label-green',
+        command: () => {
+          store.msg('Setting green label...');
+        }
+      },
+      {
+        icon: 'pi pi-bookmark',
+        label: 'Set Red Label',
+        class: 'label-red',
+        command: () => {
+          store.msg('Setting red label...');
+        }
+      },
+      {
+        icon: 'pi pi-bookmark',
+        label: 'Set Yellow Label',
+        class: 'label-yellow',
+        command: () => {
+          store.msg('Setting yellow label...');
+        }
+      },
+      {
+        icon: 'pi pi-bookmark',
+        label: 'Set Blue Label',
+        class: 'label-blue',
+        command: () => {
+          store.msg('Setting blue label...');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        icon: 'pi pi-times',
+        label: 'Remove Labels',
+        command: () => {
+          store.msg('Removing labels...');
+        }
+      }
+    ]
+  }
+]);
+const toggleMenuSetLabels = (event) => {
+  menu_set_labels.value.toggle(event);
+};
+
+
+///////////////////////////////////////////////////////////
+// Visualize
+///////////////////////////////////////////////////////////
+const menu_visualize = ref(null);
+const items_menu_visualize = ref([
+  {
+    label: 'Visualization Options',
+    items: [
+      {
+        icon: 'pi pi-eye',
+        label: 'Visualize Selection',
+        command: () => {
+          store.msg('Visualizing selection...');
+        }
+      },
+      {
+        icon: 'pi pi-eye',
+        label: 'Visualize Whole Document',
+        command: () => {
+          store.msg('Visualizing whole document...');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        icon: 'pi pi-question-circle',
+        label: 'How to use?',
+        command: () => {
+          store.msg('Opening visualization help...');
+        }
+      }
+    ]
+  }
+]);
+const toggleMenuVisualize = (event) => {
+  menu_visualize.value.toggle(event);
+};
 
 
 ///////////////////////////////////////////////////////////
@@ -359,12 +452,13 @@ const toggleMenuWiki = (event) => {
 
       <Button text class="menu-button" 
         v-tooltip.bottom="'Set color label to the selected annotation file'"
-        @click="store.msg('TBD')()">
+        @click="toggleMenuSetLabels">
         <font-awesome-icon :icon="['far', 'bookmark']" class="menu-icon" />
         <span>
           Set Labels
         </span>
       </Button>
+      <Menu ref="menu_set_labels" :model="items_menu_set_labels" :popup="true" />
     </div>
     <div class="menu-group-title">
       File Label
@@ -388,12 +482,13 @@ const toggleMenuWiki = (event) => {
 
       <Button text class="menu-button" 
         v-tooltip.right="'Visualize the annotation data using Brat'"
-        @click="store.msg('TBD')()">
+        @click="toggleMenuVisualize">
         <font-awesome-icon :icon="['fas', 'igloo']" class="menu-icon" />
         <span>
           Visualize
         </span>
       </Button>
+      <Menu ref="menu_visualize" :model="items_menu_visualize" :popup="true" />
     </div>
     <div class="menu-group-title">
       Display Mode
@@ -536,4 +631,23 @@ const toggleMenuWiki = (event) => {
 </template>
 
 <style scoped>
+:deep(.label-green) .p-menuitem-text {
+  color: #1ea04c;
+  font-weight: bold;
+}
+
+:deep(.label-red) .p-menuitem-text {
+  color: #e53935;
+  font-weight: bold;
+}
+
+:deep(.label-yellow) .p-menuitem-text {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+:deep(.label-blue) .p-menuitem-text {
+  color: #2196f3;
+  font-weight: bold;
+}
 </style>
