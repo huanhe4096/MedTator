@@ -12,6 +12,8 @@ onMounted(() => {
 // Define reactive variables
 const ingredient = ref('document'); // For display mode
 const markMode = ref('node');       // For entity marks
+const showLinks = ref(true);        // For link marks - show links
+const showLinkLines = ref(true);    // For link marks - show link lines
 
 ///////////////////////////////////////////////////////////
 // Save as
@@ -77,6 +79,21 @@ const onChangeMarkMode = (value) => {
 // Watch for changes on markMode
 watch(markMode, (newValue) => {
   onChangeMarkMode(newValue);
+});
+
+
+///////////////////////////////////////////////////////////
+// Link Marks
+///////////////////////////////////////////////////////////
+const onChangeLinkSettings = () => {
+  console.log('Link settings changed:', { showLinks: showLinks.value, showLinkLines: showLinkLines.value });
+  // Implement the actual functionality later
+  store.msg(`Link settings updated: Show Links=${showLinks.value}, Show Lines=${showLinkLines.value}`);
+};
+
+// Watch for changes on link settings
+watch([showLinks, showLinkLines], () => {
+  onChangeLinkSettings();
 });
 
 
@@ -242,6 +259,25 @@ watch(markMode, (newValue) => {
     </div>
     <div class="menu-group-title">
       Entity Marks
+    </div>
+  </div>
+
+
+  <div class="menu-group">
+    <div class="menu-group-box">
+      <div class="flex flex-col justify-start gap-2 py-1 mr-2">
+        <div class="flex items-center gap-2">
+            <ToggleSwitch v-model="showLinks" inputId="show_links" />
+            <label for="show_links" class="ml-1">Show Links</label>
+        </div>
+        <div class="flex items-center gap-2">
+            <ToggleSwitch v-model="showLinkLines" inputId="show_lines" />
+            <label for="show_lines" class="ml-1">Show Lines</label>
+        </div>
+      </div>
+    </div>
+    <div class="menu-group-title">
+      Link Marks
     </div>
   </div>
 
