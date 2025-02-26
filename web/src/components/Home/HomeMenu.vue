@@ -14,6 +14,7 @@ const ingredient = ref('document'); // For display mode
 const markMode = ref('node');       // For entity marks
 const showLinks = ref(true);        // For link marks - show links
 const showLinkLines = ref(true);    // For link marks - show link lines
+const hintMode = ref('simple');     // For hint marks - simple/off
 
 ///////////////////////////////////////////////////////////
 // Save as
@@ -94,6 +95,27 @@ const onChangeLinkSettings = () => {
 // Watch for changes on link settings
 watch([showLinks, showLinkLines], () => {
   onChangeLinkSettings();
+});
+
+
+///////////////////////////////////////////////////////////
+// Hint Marks
+///////////////////////////////////////////////////////////
+const onChangeHintMode = (value) => {
+  console.log('Hint mode changed to:', value);
+  // Implement the actual functionality later
+  store.msg(`Hint mode changed to: ${value}`);
+};
+
+const onAcceptAllHints = () => {
+  console.log('Accept all hints clicked');
+  // Implement the actual functionality later
+  store.msg('Accept all hints initiated');
+};
+
+// Watch for changes on hint mode
+watch(hintMode, (newValue) => {
+  onChangeHintMode(newValue);
 });
 
 
@@ -278,6 +300,34 @@ watch([showLinks, showLinkLines], () => {
     </div>
     <div class="menu-group-title">
       Link Marks
+    </div>
+  </div>
+
+
+  <div class="menu-group">
+    <div class="menu-group-box">
+      <div class="flex flex-col justify-start gap-2 py-1 mr-2">
+        <div class="flex items-center gap-2">
+            <RadioButton v-model="hintMode" inputId="hint_mode_simple" value="simple" />
+            <label for="hint_mode_simple">Simple</label>
+        </div>
+        <div class="flex items-center gap-2">
+            <RadioButton v-model="hintMode" inputId="hint_mode_off" value="off" />
+            <label for="hint_mode_off">No Hint</label>
+        </div>
+      </div>
+
+      <Button text class="menu-button"
+        v-tooltip.bottom="'Accept all hints in the current annotation'"
+        @click="onAcceptAllHints">
+        <font-awesome-icon :icon="['fas', 'check-double']" class="menu-icon" />
+        <span>
+          Accept All
+        </span>
+      </Button>
+    </div>
+    <div class="menu-group-title">
+      Hint Marks
     </div>
   </div>
 
