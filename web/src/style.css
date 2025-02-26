@@ -171,6 +171,29 @@ a:hover {
 .menu-small-button.active {
   background-color: var(--bg-active-color) !important;
 }
+
+/* Triangle indicator for submenu buttons */
+.menu-button-submenu {
+  position: relative;
+}
+.menu-button-submenu span{
+  margin-top: -2px;
+  margin-bottom: 2px;
+}
+.menu-button-submenu::after {
+  content: '';
+  position: absolute;
+  bottom: 0px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 4px solid #000;
+  opacity: 0.6;
+}
+
 .menu-icon {
   font-size: 1.8rem;
 }

@@ -430,8 +430,8 @@ const toggleMenuWiki = (event) => {
       </Button>
 
       <Button text 
-        class="menu-button"
-        v-tooltip.bottom="'Save the current annotation data to a local file.'"
+        class="menu-button menu-button-submenu"
+        v-tooltip.right="'Save the current annotation data to a local file.'"
         @click="toggleMenuSaveAs">
         <font-awesome-icon :icon="['far', 'copy']" class="menu-icon" />
         <span>
@@ -450,8 +450,8 @@ const toggleMenuWiki = (event) => {
   <div class="menu-group">
     <div class="menu-group-box">
 
-      <Button text class="menu-button" 
-        v-tooltip.bottom="'Set color label to the selected annotation file'"
+      <Button text class="menu-button menu-button-submenu" 
+        v-tooltip.right="'Set color label to the selected annotation file'"
         @click="toggleMenuSetLabels">
         <font-awesome-icon :icon="['far', 'bookmark']" class="menu-icon" />
         <span>
@@ -480,7 +480,7 @@ const toggleMenuWiki = (event) => {
         </div>
       </div>
 
-      <Button text class="menu-button" 
+      <Button text class="menu-button menu-button-submenu" 
         v-tooltip.right="'Visualize the annotation data using Brat'"
         @click="toggleMenuVisualize">
         <font-awesome-icon :icon="['fas', 'igloo']" class="menu-icon" />
@@ -591,8 +591,8 @@ const toggleMenuWiki = (event) => {
   <div class="menu-group">
     <div class="menu-group-box">
       <!-- Sample dropdown -->
-      <Button text class="menu-button" 
-        v-tooltip.bottom="'Load sample annotation tasks'"
+      <Button text class="menu-button menu-button-submenu" 
+        v-tooltip.right="'Load sample annotation tasks'"
         @click="toggleMenuSample">
         <font-awesome-icon :icon="['far', 'edit']" class="menu-icon" />
         <span>
@@ -602,8 +602,8 @@ const toggleMenuWiki = (event) => {
       <Menu ref="menu_sample" :model="items_menu_sample" :popup="true" />
 
       <!-- Schema dropdown -->
-      <Button text class="menu-button" 
-        v-tooltip.bottom="'Edit current schema or create a new schema'"
+      <Button text class="menu-button menu-button-submenu" 
+        v-tooltip.right="'Edit current schema or create a new schema'"
         @click="toggleMenuSchema">
         <font-awesome-icon icon="fa-solid fa-table-cells" class="menu-icon" />
         <span>
@@ -613,8 +613,8 @@ const toggleMenuWiki = (event) => {
       <Menu ref="menu_schema" :model="items_menu_schema" :popup="true" />
 
       <!-- Wiki dropdown -->
-      <Button text class="menu-button" 
-        v-tooltip.bottom="'Show the detailed user manual in a new window'"
+      <Button text class="menu-button menu-button-submenu" 
+        v-tooltip.right="'Show the detailed user manual in a new window'"
         @click="toggleMenuWiki">
         <font-awesome-icon icon="fa-solid fa-book" class="menu-icon" />
         <span>
@@ -631,6 +631,7 @@ const toggleMenuWiki = (event) => {
 </template>
 
 <style scoped>
+/* Label colors for Set Labels menu */
 :deep(.label-green) .p-menuitem-text {
   color: #1ea04c;
   font-weight: bold;
