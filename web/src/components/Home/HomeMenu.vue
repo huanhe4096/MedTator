@@ -119,6 +119,167 @@ watch(hintMode, (newValue) => {
 });
 
 
+///////////////////////////////////////////////////////////
+// Help Section Menus
+///////////////////////////////////////////////////////////
+
+// Sample Menu
+const menu_sample = ref(null);
+const items_menu_sample = ref([
+  {
+    label: 'Sample Tasks',
+    items: [
+      {
+        icon: 'pi pi-file-edit',
+        label: 'Sample Text: COVID Vaccine Note',
+        command: () => {
+          store.msg('Loading sample text...');
+        }
+      },
+      {
+        icon: 'pi pi-file-edit',
+        label: 'Customize a Sample Text',
+        command: () => {
+          store.msg('Customize sample text...');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        icon: 'pi pi-file-edit',
+        label: 'Minimal Annotation Task',
+        command: () => {
+          store.msg('Loading minimal annotation task...');
+        }
+      },
+      {
+        icon: 'pi pi-file-edit',
+        label: 'Entity and Relation Annotation Task',
+        command: () => {
+          store.msg('Loading entity and relation task...');
+        }
+      },
+      {
+        icon: 'pi pi-file-edit',
+        label: 'Document-Level Annotation Task',
+        command: () => {
+          store.msg('Loading document-level task...');
+        }
+      },
+      {
+        icon: 'pi pi-file-edit',
+        label: 'IAA Calculation Task',
+        command: () => {
+          store.msg('Loading IAA calculation task...');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        icon: 'pi pi-github',
+        label: 'VAERS Adverse Event Annotation Task',
+        command: () => {
+          store.msg('Loading VAERS dataset from remote...');
+        }
+      },
+      {
+        icon: 'pi pi-github',
+        label: 'Error Analysis of NLP System Results',
+        command: () => {
+          store.msg('Loading error analysis sample...');
+        }
+      }
+    ]
+  }
+]);
+const toggleMenuSample = (event) => {
+  menu_sample.value.toggle(event);
+};
+
+// Schema Menu
+const menu_schema = ref(null);
+const items_menu_schema = ref([
+  {
+    label: 'Schema Actions',
+    items: [
+      {
+        icon: 'pi pi-pencil',
+        label: 'Edit Current Schema File',
+        command: () => {
+          store.msg('Editing current schema...');
+        }
+      },
+      {
+        icon: 'pi pi-plus',
+        label: 'Create New Schema File',
+        command: () => {
+          store.msg('Creating new schema...');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        icon: 'pi pi-question-circle',
+        label: 'How to Use Schema Editor?',
+        command: () => {
+          store.msg('Opening schema editor help...');
+        }
+      },
+      {
+        icon: 'pi pi-external-link',
+        label: 'More Sample Schema Files...',
+        command: () => {
+          store.msg('Opening sample schema files...');
+        }
+      }
+    ]
+  }
+]);
+const toggleMenuSchema = (event) => {
+  menu_schema.value.toggle(event);
+};
+
+// Wiki Menu
+const menu_wiki = ref(null);
+const items_menu_wiki = ref([
+  {
+    label: 'Documentation',
+    items: [
+      {
+        icon: 'pi pi-book',
+        label: 'MedTator Wiki',
+        command: () => {
+          store.msg('Opening MedTator wiki...');
+        }
+      },
+      {
+        icon: 'pi pi-book',
+        label: 'Annotation Best Practice',
+        command: () => {
+          store.msg('Opening annotation best practices...');
+        }
+      },
+      {
+        separator: true
+      },
+      {
+        icon: 'pi pi-exclamation-circle',
+        label: 'Report an Issue',
+        command: () => {
+          store.msg('Opening issue reporting...');
+        }
+      }
+    ]
+  }
+]);
+const toggleMenuWiki = (event) => {
+  menu_wiki.value.toggle(event);
+};
+
+
 </script>
 
 <template>
@@ -334,15 +495,38 @@ watch(hintMode, (newValue) => {
 
   <div class="menu-group">
     <div class="menu-group-box">
-
+      <!-- Sample dropdown -->
       <Button text class="menu-button" 
-        v-tooltip.bottom="'Show the detailed user manual in a new window.'"
-        @click="store.showGuide()">
+        v-tooltip.bottom="'Load sample annotation tasks'"
+        @click="toggleMenuSample">
+        <font-awesome-icon :icon="['far', 'edit']" class="menu-icon" />
+        <span>
+          Sample
+        </span>
+      </Button>
+      <Menu ref="menu_sample" :model="items_menu_sample" :popup="true" />
+
+      <!-- Schema dropdown -->
+      <Button text class="menu-button" 
+        v-tooltip.bottom="'Edit current schema or create a new schema'"
+        @click="toggleMenuSchema">
+        <font-awesome-icon icon="fa-solid fa-table-cells" class="menu-icon" />
+        <span>
+          Schema
+        </span>
+      </Button>
+      <Menu ref="menu_schema" :model="items_menu_schema" :popup="true" />
+
+      <!-- Wiki dropdown -->
+      <Button text class="menu-button" 
+        v-tooltip.bottom="'Show the detailed user manual in a new window'"
+        @click="toggleMenuWiki">
         <font-awesome-icon icon="fa-solid fa-book" class="menu-icon" />
         <span>
           Wiki
         </span>
       </Button>
+      <Menu ref="menu_wiki" :model="items_menu_wiki" :popup="true" />
     </div>
     <div class="menu-group-title">
       Help
