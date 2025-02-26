@@ -1,6 +1,6 @@
 <script setup>
 import * as toolbox from '../../utils/toolbox';
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import { onMounted } from 'vue';
 import { useDataStore } from '../../DataStore';
 const store = useDataStore();
@@ -8,6 +8,10 @@ const store = useDataStore();
 onMounted(() => {
   console.log('* mounted QuickstartPage Page');
 });
+
+// Define reactive variables
+const ingredient = ref('document'); // For display mode
+const markMode = ref('node');       // For entity marks
 
 ///////////////////////////////////////////////////////////
 // Save as
@@ -59,6 +63,21 @@ const toggleMenuSaveAs = (event) => {
 ///////////////////////////////////////////////////////////
 // Set Labels
 ///////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////
+// Entity Marks
+///////////////////////////////////////////////////////////
+const onChangeMarkMode = (value) => {
+  console.log('Mark mode changed to:', value);
+  // Implement the actual functionality later
+  store.msg(`Mark mode changed to: ${value}`);
+};
+
+// Watch for changes on markMode
+watch(markMode, (newValue) => {
+  onChangeMarkMode(newValue);
+});
 
 
 </script>
